@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vishal Bhamare — Full-Stack Engineer (Angular • Spring Boot)</title>
+  <meta name="description" content="Portfolio of Vishal Bhamare — Full-Stack Engineer specializing in Angular, Spring Boot, and PostgreSQL. AML/Banking domain." />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --bg: #0b0d12;
+      --surface: #0f1219;
+      --text: #e8ebf2;
+      --muted:#a7b0c0;
+      --brand:#6aa7ff;
+      --brand-2:#7cf7e6;
+      --card:#111623;
+      --border:#202633;
+      --shadow: 0 10px 24px rgba(0,0,0,.35);
+      --radius: 16px;
+      --maxw: 1080px;
+    }
+    /* Light theme defaults (auto; toggle overrides) */
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg:#f7f8fb; --surface:#ffffff; --text:#0e1220; --muted:#5a657a;
+        --brand:#2f6fff; --brand-2:#0bb5a8; --card:#ffffff; --border:#e7eaf0;
+        --shadow: 0 10px 24px rgba(16,24,40,.08);
+      }
+    }
+    /* Manual theme classes override */
+    .theme-light{
+      --bg:#f7f8fb; --surface:#ffffff; --text:#0e1220; --muted:#5a657a;
+      --brand:#2f6fff; --brand-2:#0bb5a8; --card:#ffffff; --border:#e7eaf0;
+      --shadow: 0 10px 24px rgba(16,24,40,.08);
+    }
+    .theme-dark{
+      --bg: #0b0d12; --surface:#0f1219; --text:#e8ebf2; --muted:#a7b0c0;
+      --brand:#6aa7ff; --brand-2:#7cf7e6; --card:#111623; --border:#202633;
+      --shadow: 0 10px 24px rgba(0,0,0,.35);
+    }
+
+    /* Base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 80% -10%, color-mix(in oklab, var(--brand) 15%, transparent) 0%, transparent 60%),
+                  radial-gradient(900px 500px at 10% -10%, color-mix(in oklab, var(--brand-2) 18%, transparent) 0%, transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--maxw); margin-inline:auto; padding:0 20px}
+    .section{padding:64px 0}
+    h1,h2,h3{line-height:1.2; margin:0 0 12px}
+    h2{font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);}
+    p{margin: 0 0 12px}
+
+    /* Header */
+    header{
+      position: sticky; top:0; z-index: 10; backdrop-filter: blur(8px);
+      background: color-mix(in oklab, var(--surface) 75%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; height:64px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px}
+    .logo{
+      width:28px; height:28px; border-radius:8px; display:grid; place-items:center;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color:#061220; font-weight:800; box-shadow: var(--shadow);
+    }
+    .nav-links{display:flex; gap:16px; align-items:center}
+    .nav-links a{padding:8px 10px; border-radius:10px}
+    .nav-links a:hover{background: color-mix(in oklab, var(--brand) 12%, transparent); text-decoration:none}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid var(--border);
+      background: color-mix(in oklab, var(--surface) 80%, transparent);
+      color:var(--text); cursor:pointer; transition: transform .05s ease;
+    }
+    .btn:hover{box-shadow: var(--shadow)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{background: linear-gradient(135deg, color-mix(in oklab, var(--brand) 78%, #fff 0%), color-mix(in oklab, var(--brand-2) 70%, #fff 0%)); color:#07111b; border-color:transparent}
+    .btn.ghost{background:transparent}
+    .pill{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; color:var(--muted); font-size:.9rem}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns: 1.25fr .75fr; gap:28px; align-items:center; padding:36px 0 8px}
+    @media (max-width: 900px){ .hero{grid-template-columns: 1fr} }
+    .hero-card{
+      background: linear-gradient(180deg, color-mix(in oklab, var(--card) 85%, transparent) 0%, transparent 100%);
+      border:1px solid var(--border); border-radius:var(--radius); padding:28px; box-shadow: var(--shadow);
+    }
+    .title{font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); letter-spacing:.2px}
+    .subtitle{color:var(--muted); font-size: clamp(1rem, .95rem + .4vw, 1.15rem)}
+    .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:16px}
+    .stat-grid{display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:16px}
+    .stat{padding:14px; border:1px solid var(--border); border-radius:12px; background: var(--surface); text-align:center}
+    .stat .num{font-weight:800; font-size:1.1rem}
+    .avatar{
+      width:100%; min-height:220px; border-radius:var(--radius); border:1px dashed var(--border);
+      display:grid; place-items:center; color:var(--muted); padding:20px; background: color-mix(in oklab, var(--surface) 60%, transparent);
+      text-align:center
+    }
+
+    /* Grids & cards */
+    .grid{display:grid; gap:16px}
+    .grid-3{grid-template-columns: repeat(3, 1fr)}
+    .grid-2{grid-template-columns: repeat(2, 1fr)}
+    @media (max-width: 900px){ .grid-3{grid-template-columns: 1fr 1fr} }
+    @media (max-width: 640px){ .grid-3,.grid-2{grid-template-columns: 1fr} }
+    .card{
+      background: var(--card); border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow: var(--shadow);
+    }
+    .card h3{margin-bottom:6px}
+    .meta{color:var(--muted); font-size:.95rem}
+    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .tag{font-size:.85rem; border:1px solid var(--border); padding:4px 8px; border-radius:999px; color:var(--muted)}
+    .card .actions{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+
+    /* Skills */
+    .skills{display:flex; flex-wrap:wrap; gap:10px}
+    .skill{padding:8px 12px; border:1px solid var(--border); border-radius:999px; background: color-mix(in oklab, var(--surface) 70%, transparent)}
+
+    /* Filters */
+    .filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+    .filter-btn{padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer}
+    .filter-btn.active{background: color-mix(in oklab, var(--brand) 20%, transparent); border-color: color-mix(in oklab, var(--brand) 35%, var(--border));}
+
+    /* Timeline */
+    .timeline{position:relative; padding-left:22px}
+    .timeline:before{content:""; position:absolute; left:8px; top:4px; bottom:4px; width:2px; background: var(--border)}
+    .t-item{position:relative; margin:0 0 18px}
+    .t-item:before{content:""; position:absolute; left:-2px; top:.45rem; width:10px; height:10px; border-radius:50%; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow:0 0 0 3px color-mix(in oklab, var(--brand) 15%, transparent)}
+    .t-role{font-weight:700}
+    .t-meta{color:var(--muted); font-size:.95rem}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border); padding:28px 0; color:var(--muted); text-align:center}
+
+    /* Utilities */
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .right{margin-left:auto}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">VB</div>
+        <span>Vishal Bhamare</span>
+        <span class="pill">Full-Stack • Angular • Spring Boot</span>
+      </div>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <button id="themeBtn" class="btn ghost" aria-pressed="false" aria-label="Toggle color theme">🌗 Theme</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="container hero section" id="home">
+      <div class="hero-card" aria-labelledby="intro-title">
+        <h1 id="intro-title" class="title">Building robust, scalable apps for the real world.</h1>
+        <p class="subtitle">I’m a software engineer with <strong>4+ years</strong> across <strong>Angular</strong>, <strong>Spring Boot</strong>, and <strong>PostgreSQL</strong> — with deep domain work in <strong>AML/Banking</strong>, DRL rules, and data-heavy systems.</p>
+        <div class="cta">
+          <a class="btn primary" href="mailto:vbhamare11@gmail.com" aria-label="Email Vishal">✉️ Let’s work together</a>
+          <a class="btn" href="#projects">See Projects</a>
+          <a class="btn" href="https://v1shal-b.github.io/portfolio" target="_blank" rel="noopener">Legacy Portfolio ↗</a>
+        </div>
+        <div class="stat-grid" role="list" aria-label="Quick stats">
+          <div class="stat" role="listitem"><div class="num">Angular 10+</div><div class="meta">Frontend</div></div>
+          <div class="stat" role="listitem"><div class="num">Spring Boot</div><div class="meta">Backend</div></div>
+          <div class="stat" role="listitem"><div class="num">AML/Banking</div><div class="meta">Domain</div></div>
+        </div>
+      </div>
+      <div class="avatar" aria-label="Avatar placeholder">
+        <!-- You can replace with your photo by setting a background-image or <img> here -->
+        <div>
+          <strong>No photo yet.</strong><br/> Drop an image here later for a personal touch.
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="container section" id="skills">
+      <h2>Core Skills</h2>
+      <p class="meta">Frameworks, databases & tooling I ship with confidence.</p>
+      <div class="skills" aria-label="Skill list">
+        <span class="skill">Angular</span>
+        <span class="skill">TypeScript / JS</span>
+        <span class="skill">HTML / CSS</span>
+        <span class="skill">Spring Boot</span>
+        <span class="skill">Java / JPA</span>
+        <span class="skill">REST APIs</span>
+        <span class="skill">PostgreSQL</span>
+        <span class="skill">MySQL</span>
+        <span class="skill">Oracle / MSSQL (exposure)</span>
+        <span class="skill">Drools (DRL)</span>
+        <span class="skill">Git</span>
+        <span class="skill">Bootstrap / UI-Grid</span>
+        <span class="skill">Testing with Postman</span>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="container section" id="projects">
+      <div class="row" style="align-items:center">
+        <h2>Selected Projects</h2>
+        <div class="right filters" role="tablist" aria-label="Filter projects">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn" data-filter="aml" role="tab" aria-selected="false">AML</button>
+          <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web</button>
+          <button class="filter-btn" data-filter="product" role="tab" aria-selected="false">Products</button>
+        </div>
+      </div>
+
+      <div class="grid grid-3" id="projectGrid">
+        <!-- AML Fraud Rules -->
+        <article class="card project" data-tags="aml,backend,java">
+          <h3>Fraud Detection Rules (AML)</h3>
+          <p>Designed & deployed DRL rule-sets to detect suspicious transactions; built REST services for automated reports and scenario execution.</p>
+          <p class="meta">Spring Boot • Drools (DRL) • Oracle/MSSQL</p>
+          <div class="tags">
+            <span class="tag">AML</span><span class="tag">Spring Boot</span><span class="tag">DRL</span>
+          </div>
+        </article>
+
+        <!-- Customer Engagement Platform -->
+        <article class="card project" data-tags="web,fullstack,postgres">
+          <h3>Customer Engagement Platform</h3>
+          <p>End-to-end modules for onboarding, dashboards, and notifications with secure APIs and role-based access.</p>
+          <p class="meta">Angular • Spring Boot • PostgreSQL</p>
+          <div class="tags">
+            <span class="tag">Web</span><span class="tag">Angular</span><span class="tag">PostgreSQL</span>
+          </div>
+        </article>
+
+        <!-- Quadrant Site Rebuild -->
+        <article class="card project" data-tags="web,fullstack,migration">
+          <h3>Enterprise Website Migration</h3>
+          <p>Migrated WordPress to Angular + Spring Boot with a headless architecture, custom CMS features, and SEO-safe routing.</p>
+          <p class="meta">Angular • Spring Boot • MySQL/Postgres</p>
+          <div class="tags">
+            <span class="tag">Web</span><span class="tag">Migration</span><span class="tag">SEO</span>
+          </div>
+        </article>
+
+        <!-- CraftCRM -->
+        <article class="card project" data-tags="product,web,fullstack">
+          <h3>CraftCRM (Maker Project)</h3>
+          <p>Lightweight CRM for small businesses with contact pipelines, quick notes, and simple billing — optimized for low-end devices.</p>
+          <p class="meta">Angular • Spring Boot • Postgres</p>
+          <div class="tags">
+            <span class="tag">Product</span><span class="tag">Angular</span><span class="tag">Postgres</span>
+          </div>
+        </article>
+
+        <!-- Toolspace -->
+        <article class="card project" data-tags="product,web">
+          <h3>Toolspace</h3>
+          <p>A curated toolbox (dev/design/ops) with simple utilities and fast UX. Built as a PWA for offline use.</p>
+          <p class="meta">Vanilla JS • PWA</p>
+          <div class="tags">
+            <span class="tag">Product</span><span class="tag">PWA</span>
+          </div>
+        </article>
+
+        <!-- Yuga Cycle Project -->
+        <article class="card project" data-tags="product,web,creative">
+          <h3>Yuga Cycle — Interactive</h3>
+          <p>Content-rich, mythology-inspired experience with timelines and calculators, focused on smooth UI and strong storytelling.</p>
+          <p class="meta">Angular • Content Engine</p>
+          <div class="tags">
+            <span class="tag">Product</span><span class="tag">Creative</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="container section" id="experience">
+      <h2>Experience</h2>
+      <div class="timeline" aria-label="Career timeline">
+        <div class="t-item">
+          <div class="t-role">Software Developer — Manipal Technologies Ltd</div>
+          <div class="t-meta">Oct 2023 — Present • AML / Banking • Spring Boot, Angular, DRL</div>
+          <p>Rule-based fraud scenarios, reporting APIs, dynamic templates, and secure auth flows.</p>
+        </div>
+        <div class="t-item">
+          <div class="t-role">Software Engineer — Quadrant Knowledge Solutions</div>
+          <div class="t-meta">Feb 2023 — Sep 2023 • Angular, Spring Boot, Postgres</div>
+          <p>Headless rebuilds, custom dashboards, e-commerce flows, and CMS tooling.</p>
+        </div>
+        <div class="t-item">
+          <div class="t-role">Software Engineer — Finnovus Technologies</div>
+          <div class="t-meta">Aug 2021 — Feb 2023 • Customer Engagement Platform</div>
+          <p>Full-stack features, QA collaboration, code reviews, defect reduction.</p>
+        </div>
+        <div class="t-item">
+          <div class="t-role">Angular Developer — Renizant Technologies</div>
+          <div class="t-meta">Oct 2020 — Aug 2021 • Frontend</div>
+          <p>Auth/landing flows, API consumption, theming (Nebular), and performance tuning.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:10px">
+        <div class="card">
+          <h3>Highlights</h3>
+          <ul>
+            <li>Finalist — Smart India Hackathon (2017)</li>
+            <li>Finalist — Rajasthan Digi-Fest (2016, 2018)</li>
+            <li>Freelancing since 2016</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What I’m exploring</h3>
+          <ul>
+            <li>AI agents for internal developer knowledge</li>
+            <li>Lean product building & distribution</li>
+            <li>Data-driven fraud analytics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="container section" id="contact">
+      <h2>Contact</h2>
+      <p class="meta">Based in Dhule, Maharashtra • English • Hindi • Marathi</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Work with me</h3>
+          <p>Open to full-time roles, consulting, and product collaborations.</p>
+          <div class="actions">
+            <a class="btn primary" href="mailto:vbhamare11@gmail.com">Email: vbhamare11@gmail.com</a>
+            <button class="btn" id="copyEmailBtn" data-email="vbhamare11@gmail.com">Copy email</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Links</h3>
+          <div class="row">
+            <a class="btn" href="https://v1shal-b.github.io/portfolio" target="_blank" rel="noopener">Legacy Portfolio ↗</a>
+            <a class="btn" href="#" aria-disabled="true" title="Add your resume file and update this link">Resume (add link)</a>
+          </div>
+          <p class="meta" style="margin-top:8px">Tip: upload <code>resume.pdf</code> to the same repo and point this button to it.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Vishal Bhamare · Built with HTML, CSS & JS · Dark-mode ready
+    </div>
+  </footer>
+
+  <script>
+    // ----- Theme toggle with persistence -----
+    (function(){
+      const root = document.documentElement;
+      const btn = document.getElementById('themeBtn');
+      const key = 'vb-theme';
+      const saved = localStorage.getItem(key);
+      if(saved){
+        root.classList.toggle('theme-dark', saved === 'dark');
+        root.classList.toggle('theme-light', saved === 'light');
+        btn.setAttribute('aria-pressed', saved === 'dark');
+      }
+      btn?.addEventListener('click', ()=>{
+        const isDark = root.classList.contains('theme-dark');
+        root.classList.toggle('theme-dark', !isDark);
+        root.classList.toggle('theme-light', isDark);
+        localStorage.setItem(key, !isDark ? 'dark' : 'light');
+        btn.setAttribute('aria-pressed', String(!isDark));
+      });
+    })();
+
+    // ----- Year -----
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ----- Smooth scroll (native supported; fallback minor) -----
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        if(!id) return;
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // ----- Project filters -----
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project');
+    filterBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        filterBtns.forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+        const tag = btn.dataset.filter;
+        cards.forEach(card=>{
+          const tags = (card.dataset.tags||'').split(',').map(s=>s.trim());
+          const show = tag==='all' || tags.includes(tag);
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // ----- Copy email -----
+    document.getElementById('copyEmailBtn')?.addEventListener('click', async (e)=>{
+      const email = e.currentTarget.dataset.email;
+      try{
+        await navigator.clipboard.writeText(email);
+        const old = e.currentTarget.textContent;
+        e.currentTarget.textContent = 'Copied ✓';
+        setTimeout(()=> e.currentTarget.textContent = old, 1200);
+      }catch(err){
+        alert('Copy failed. Email: ' + email);
+      }
+    });
+
+    // ----- Tiny enhancement: reduce motion if user prefers -----
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.style.scrollBehavior = 'auto';
+    }
+  </script>
+</body>
+</html>
