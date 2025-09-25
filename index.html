@@ -134,9 +134,27 @@
 
     /* Timeline */
     .timeline{position:relative; padding-left:22px}
-    .timeline:before{content:""; position:absolute; left:8px; top:4px; bottom:4px; width:2px; background: var(--border)}
+    .timeline:before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: var(--border);
+}
     .t-item{position:relative; margin:0 0 18px}
-    .t-item:before{content:""; position:absolute; left:-2px; top:.45rem; width:10px; height:10px; border-radius:50%; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow:0 0 0 3px color-mix(in oklab, var(--brand) 15%, transparent)}
+    .t-item:before {
+  content: "";
+  position: absolute;
+  left: -7px;   /* adjust alignment */
+  top: 0.5rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand); /* single brand color */
+  box-shadow: 0 0 0 2px var(--surface); /* halo */
+}
     .t-role{font-weight:700}
     .t-meta{color:var(--muted); font-size:.95rem}
 
